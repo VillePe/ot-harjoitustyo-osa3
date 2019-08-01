@@ -1,7 +1,7 @@
-POST http://localhost:3002/notes
+POST http://localhost:3002/api/persons
 Content-Type: application/json
 
 {
-    "content": "Do not forget to set right content type",
-    "important": true
+    "name": "Testi Testinen",
+    "number": "050-1236547"
 }
