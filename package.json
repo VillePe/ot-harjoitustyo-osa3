@@ -2,11 +2,14 @@
   "name": "server",
   "version": "0.0.1",
   "description": "Serveri",
-  "main": "phonebookindex.js",
+  "main": "server.js",
   "scripts": {
-    "watch": "nodemon phonebookindex.js",
-    "start": "node phonebookindex.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "nodemon server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "rm -rf build && cd ../ot-harjoitustyo/osa2/part1/ && npm run build --prod && cp build -r ../../../ot-harjoitustyo-osa3/",    
+    "deploy": "",
+    "deploy:full": ""    
   },
   "author": "VP",
   "license": "MIT",

@@ -1,1 +1,1 @@
-web: node phonebookindex.js
+web: node server.js
