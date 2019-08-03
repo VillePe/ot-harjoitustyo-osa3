@@ -7,15 +7,17 @@
     "watch": "nodemon server.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf build && cd ../ot-harjoitustyo/osa2/part1/ && npm run build --prod && cp build -r ../../../ot-harjoitustyo-osa3/",    
+    "build:ui": "rm -rf build && cd ../osa2/part1/ && npm run build --prod && cp build -r ../../osa3/",
     "deploy": "",
-    "deploy:full": ""    
+    "deploy:full": ""
   },
   "author": "VP",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "mongoose": "^5.6.7",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1"
   }
