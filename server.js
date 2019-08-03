@@ -17,10 +17,12 @@ app.get("/info", (req, res) => {
     })
 })
 
-app.get("/api/persons/", (req, res) => {
-    Person.find({}).then(persons => {
-        res.json(persons);
-    })
+app.get("/api/persons/", (req, res, next) => {
+    Person.find({})
+        .then(persons => {
+            res.json(persons);
+        })
+        .catch(error => next(error));
 })
 
 app.get("/api/persons/:id", (req, res, next) => {
@@ -44,14 +46,8 @@ app.delete("/api/persons/:id", (req, res, next) => {
         .catch(error => next(error))
 })
 
-app.post("/api/persons", (req, res) => {
+app.post("/api/persons", (req, res, next) => {
     const body = req.body;
-
-    if (!body.name) {
-        return res.status(400).json({ error: "Name is missing" })
-    } else if (!body.number) {
-        return res.status(400).json({ error: "Number is missing" })
-    }
 
     const person = new Person({
         name: body.name,
@@ -63,15 +59,12 @@ app.post("/api/persons", (req, res) => {
             res.json(savedPerson.toJSON());
             console.log("Person added!");
         })
-        .catch(error => {
-            console.log("Error while adding person:", error.message);
-            res.status(500).end();
-        })
+        .catch(error => next(error));
 })
 
 app.put("/api/persons/:id", (req, res, next) => {
     const body = req.body;
-    const id = {id: body.id};
+    const id = { id: body.id };
 
     const person = {
         id: id,
@@ -100,6 +93,8 @@ const errorHandler = (error, req, res, next) => {
     console.error("Error:", error.message);
     if (error.name === "CastError" && error.kind == "ObjectId") {
         return res.status(400).send({ error: "Malformatted id" });
+    } else if (error.name === "ValidationError") {
+        return res.status(400).json({error: error.message})
     }
 
     next(error);
