@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator")
+const uniqueValidator = require("mongoose-unique-validator");
 
 const url = process.env.MONGODB_URI;
 
@@ -24,7 +24,7 @@ const censoredUrl = () => {
 
     let result = url.substr(0, passwdColongIndex + 1) + "*****" + url.substr(passwdColongIndex + passwdLength, url.length - atMarkIndex);
     return result;
-}
+};
 
 console.log("Connecting to", censoredUrl());
 
@@ -48,15 +48,15 @@ const personSchema = new mongoose.Schema({
         required: true,
         minlength: 8
     }
-})
+});
 personSchema.plugin(uniqueValidator);
 
 personSchema.set("toJSON", {
     transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString()
-        delete returnedObject._id
-        delete returnedObject.__v
+        returnedObject.id = returnedObject._id.toString();
+        delete returnedObject._id;
+        delete returnedObject.__v;
     }
-})
+});
 
 module.exports = mongoose.model("Person", personSchema);

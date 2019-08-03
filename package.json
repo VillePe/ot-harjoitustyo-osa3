@@ -21,5 +21,8 @@
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0"
   }
 }
